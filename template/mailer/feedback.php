@@ -22,7 +22,7 @@ if ( !empty($_POST) ) {
 	$messages .= "<li><strong>Email: </strong>" . $email . "</li>";
 	$messages .= "<li><strong>Phone: </strong>" . $phone . "</li>";
 	$messages .= "<li><strong>Message: </strong>" . $message . "</li>";
-    $messages .= "<li><strong>File: </strong>" . $_FILES['userfile']['name'] . "</li>";
+    //$messages .= "<li><strong>File: </strong>" . $_FILES['userfile']['name'] . "</li>";
 	$messages .= "</ul> \r\n";
 
     $mail = new PHPMailer;
@@ -41,16 +41,16 @@ if ( !empty($_POST) ) {
 
     $mail->addAddress($to, 'Admin'); //Add a recipient
 
-    //Attachments
-    $ext = PHPMailer::mb_pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
-    $uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $_FILES['userfile']['name'])) . '.' . $ext;
-    if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-        if (!$mail->addAttachment($uploadfile, $_FILES['userfile']['name'])) {
-            $rfile = 'Failed to attach file ' . $_FILES['userfile']['name'];
-        }
-    } else {
-        $rfile = 'Failed to move file to ' . $uploadfile;
-    }
+    //Attachments_i modified this
+    // $ext = PHPMailer::mb_pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+    // $uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $_FILES['userfile']['name'])) . '.' . $ext;
+    // if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+    //     if (!$mail->addAttachment($uploadfile, $_FILES['userfile']['name'])) {
+    //         $rfile = 'Failed to attach file ' . $_FILES['userfile']['name'];
+    //     }
+    // } else {
+    //     $rfile = 'Failed to move file to ' . $uploadfile;
+    // }
 
     //Content
     $mail->isHTML(true); //Set email format to HTML
